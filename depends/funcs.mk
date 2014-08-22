@@ -20,14 +20,13 @@ $(sort $(foreach dep,$(2),$(2) $(call int_get_all_dependencies,$(1),$($(dep)_dep
 endef
 
 define fetch_file
-(test -f $$($(1)_source_dir)/$(4) || \
-  ( mkdir -p $$($(1)_download_dir) && echo Fetching $(1)... && \
-  ( $(build_DOWNLOAD) "$$($(1)_download_dir)/$(4).temp" "$(2)/$(3)" || \
-    $(build_DOWNLOAD) "$$($(1)_download_dir)/$(4).temp" "$(FALLBACK_DOWNLOAD_PATH)/$(3)" ) && \
-    echo "$(5)  $$($(1)_download_dir)/$(4).temp" > $$($(1)_download_dir)/.$(4).hash && \
-    $(build_SHA256SUM) -c $$($(1)_download_dir)/.$(4).hash && \
-    mv $$($(1)_download_dir)/$(4).temp $$($(1)_source_dir)/$(4) && \
-    rm -rf $$($(1)_download_dir) ))
+(test -f $(SOURCES_PATH)/$(4) || \
+  ( mkdir -p $$($(1)_extract_dir) && \
+  ( $(build_DOWNLOAD) "$$($(1)_extract_dir)/$(3).temp" "$(2)/$(3)" || \
+    $(build_DOWNLOAD) "$$($(1)_extract_dir)/$(3).temp" "$(FALLBACK_DOWNLOAD_PATH)/$(3)" ) && \
+    echo "$(5)  $$($(1)_extract_dir)/$(4).temp" > $$($(1)_extract_dir)/.$(4).hash && \
+    $(build_SHA256SUM) -c $$($(1)_extract_dir)/.$(4).hash && \
+    mv $$($(1)_extract_dir)/$(4).temp $(SOURCES_PATH)/$(4) ))
 endef
 
 define int_get_build_recipe_hash

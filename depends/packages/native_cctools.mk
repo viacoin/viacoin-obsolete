@@ -11,7 +11,10 @@ $(package)_clang_file_name=clang-llvm-$($(package)_clang_version)-amd64-Ubuntu-1
 $(package)_clang_sha256_hash=60d8f69f032d62ef61bf527857ebb933741ec3352d4d328c5516aa520662dab7
 define $(package)_fetch_cmds
 $(call fetch_file,$(package),$($(package)_download_path),$($(package)_download_file),$($(package)_file_name),$($(package)_sha256_hash)) && \
-$(call fetch_file,$(package),$($(package)_clang_download_path),$($(package)_clang_download_file),$($(package)_clang_file_name),$($(package)_clang_sha256_hash))
+$(call fetch_file,$(package),$($(package)_ld64_download_path),$($(package)_ld64_download_file),$($(package)_ld64_file_name),$($(package)_ld64_sha256_hash)) && \
+$(call fetch_file,$(package),$($(package)_dyld_download_path),$($(package)_dyld_download_file),$($(package)_dyld_file_name),$($(package)_dyld_sha256_hash)) && \
+$(call fetch_file,$(package),$($(package)_clang_download_path),$($(package)_clang_download_file),$($(package)_clang_file_name),$($(package)_clang_sha256_hash)) && \
+$(call fetch_file,$(package),$($(package)_toolchain4_download_path),$($(package)_toolchain4_download_file),$($(package)_toolchain4_file_name),$($(package)_toolchain4_sha256_hash))
 endef
 
 define $(package)_extract_cmds
