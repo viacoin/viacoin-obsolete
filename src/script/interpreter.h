@@ -85,6 +85,12 @@ public:
         return false;
     }
 
+    virtual unsigned int GetnIn() const {
+        return 0;
+    }
+
+    virtual const CTransaction& GetTxTo() const = 0;
+
     virtual ~BaseSignatureChecker() {}
 };
 
@@ -100,6 +106,13 @@ protected:
 public:
     SignatureChecker(const CTransaction& txToIn, unsigned int nInIn) : txTo(txToIn), nIn(nInIn) {}
     bool CheckSig(const std::vector<unsigned char>& scriptSig, const std::vector<unsigned char>& vchPubKey, const CScript& scriptCode) const;
+    unsigned int GetnIn() const {
+        return nIn;
+    }
+
+    const CTransaction& GetTxTo() const {
+        return txTo;
+    }
 };
 
 bool EvalScript(std::vector<std::vector<unsigned char> >& stack, const CScript& script, unsigned int flags, const BaseSignatureChecker& checker, ScriptError* error = NULL);

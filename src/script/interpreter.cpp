@@ -373,6 +373,7 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                     // We want to compare apples to apples, so fail the script
                     // unless the type of nLockTime being tested is the same as
                     // the nLockTime in the transaction.
+                    const CTransaction& txTo = checker.GetTxTo();
                     if (!(
                           (txTo.nLockTime <  LOCKTIME_THRESHOLD && nLockTime <  LOCKTIME_THRESHOLD) ||
                           (txTo.nLockTime >= LOCKTIME_THRESHOLD && nLockTime >= LOCKTIME_THRESHOLD)
@@ -394,7 +395,7 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                     // prevent this condition. Alternatively we could test all
                     // inputs, but testing just this input minimizes the data
                     // required to prove correct CHECKLOCKTIMEVERIFY execution.
-                    if (txTo.vin[nIn].IsFinal())
+                    if (txTo.vin[checker.GetnIn()].IsFinal())
                         return false;
 
                     break;

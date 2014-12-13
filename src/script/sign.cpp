@@ -252,9 +252,9 @@ CScript CombineSignatures(const CScript& scriptPubKey, const CTransaction& txTo,
     Solver(scriptPubKey, txType, vSolutions);
 
     vector<valtype> stack1;
-    EvalScript(stack1, scriptSig1, SCRIPT_VERIFY_STRICTENC, BaseSignatureChecker());
+    EvalScript(stack1, scriptSig1, SCRIPT_VERIFY_STRICTENC, SignatureChecker(CTransaction(), 0));
     vector<valtype> stack2;
-    EvalScript(stack2, scriptSig2, SCRIPT_VERIFY_STRICTENC, BaseSignatureChecker());
+    EvalScript(stack2, scriptSig2, SCRIPT_VERIFY_STRICTENC, SignatureChecker(CTransaction(), 0));
 
     return CombineSignatures(scriptPubKey, txTo, nIn, txType, vSolutions, stack1, stack2);
 }
