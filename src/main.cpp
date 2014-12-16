@@ -3130,7 +3130,7 @@ bool InitBlockIndex() {
     // Use the provided settings for -addrindex in the new database
     fAddrIndex = GetBoolArg("-addrindex", false);
     pblocktree->WriteFlag("addrindex", fAddrIndex);
-    
+
     pblocktree->WriteFlag("auxpow", true);
 
     LogPrintf("Initializing databases...\n");
