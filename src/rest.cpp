@@ -119,7 +119,7 @@ static bool rest_headers(AcceptedConnection* conn,
         BlockMap::const_iterator it = mapBlockIndex.find(hash);
         const CBlockIndex *pindex = (it != mapBlockIndex.end()) ? it->second : NULL;
         while (pindex != NULL && chainActive.Contains(pindex)) {
-            headers.push_back(pindex->GetBlockHeader());
+            headers.push_back(pindex->GetBlockHeader(mapDirtyAuxPow));
             if (headers.size() == (unsigned long)count)
                 break;
             pindex = chainActive.Next(pindex);

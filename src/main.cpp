@@ -43,6 +43,7 @@ using namespace std;
 CCriticalSection cs_main;
 
 BlockMap mapBlockIndex;
+map<uint256, boost::shared_ptr<CAuxPow> > mapDirtyAuxPow;
 CChain chainActive;
 CBlockIndex *pindexBestHeader = NULL;
 int64_t nTimeBestReceived = 0;
@@ -149,7 +150,6 @@ namespace {
 
     /** Dirty block index entries. */
     set<CBlockIndex*> setDirtyBlockIndex;
-    map<uint256, boost::shared_ptr<CAuxPow> > mapDirtyAuxPow;
 
     /** Dirty block file entries. */
     set<int> setDirtyFileInfo;
