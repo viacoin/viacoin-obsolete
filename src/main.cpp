@@ -2622,9 +2622,10 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
         return state.DoS(100, error("%s : forked chain older than last checkpoint (height %d)", __func__, nHeight));
 
     int64_t timeframe;
-    if ((Params().AllowMinDifficultyBlocks() && nHeight < 300000) || nHeight < 451000) {
+    if (nHeight < GetAGWStartBlock()) {
         timeframe = 15 * 60;
     } else {
+        // AntiGravityWave uses tighter timeframe
         timeframe = 5 * 60;
     }
 
