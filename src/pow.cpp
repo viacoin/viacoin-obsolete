@@ -12,6 +12,11 @@
 #include "uint256.h"
 #include "util.h"
 
+int GetAGWStartBlock()
+{
+    return Params().AllowMinDifficultyBlocks() ? AGW_START_TESTNET : AGW_START_MAINNET;
+}
+
 unsigned int static GetNextWorkRequired_V1(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
 {
     unsigned int nProofOfWorkLimit = Params().ProofOfWorkLimit().GetCompact();
@@ -154,7 +159,7 @@ unsigned int static AntiGravityWave(const CBlockIndex* pindexLast, const CBlockH
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
 {
-    if (pindexLast->nHeight+1 >= 451000 || (Params().AllowMinDifficultyBlocks() && pindexLast->nHeight+1 >= 300000)) {
+    if (pindexLast->nHeight+1 >= GetAGWStartBlock()) {
         return AntiGravityWave(pindexLast, pblock, 2);
     } else if (pindexLast->nHeight+1 >= 3600) {
         return AntiGravityWave(pindexLast, pblock, 1);
