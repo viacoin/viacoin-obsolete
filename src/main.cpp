@@ -1762,7 +1762,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     //
     // However the block.nVersion=3 rule is not enforced until 750 of the last
     // 1,000 blocks are version 3 or greater (51/100 if testnet):
-    if (block.nVersion >= 3 &&
+    if (block.nVersion & 0xff >= 3 &&
         CBlockIndex::IsSuperMajority(3, pindex->pprev, Params().EnforceBlockUpgradeMajority()))
     {
         flags |= SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY;
@@ -2652,7 +2652,7 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
     }
 
     // Reject block.nVersion=2 blocks when 95% (75% on testnet) of the network has upgraded:
-    if (block.nVersion < 3 &&
+    if (block.nVersion & 0xff < 3 &&
             CBlockIndex::IsSuperMajority(3, pindexPrev, Params().RejectBlockOutdatedMajority()))
     {
         return state.Invalid(error("AcceptBlock() : rejected nVersion=2 block"),
