@@ -13,11 +13,6 @@ using namespace boost;
 
 unsigned char pchMergedMiningHeader[] = { 0xfa, 0xbe, 'm', 'm' } ;
 
-int GetAuxPowStartBlock()
-{
-    return Params().AllowMinDifficultyBlocks() ? AUXPOW_START_TESTNET : AUXPOW_START_MAINNET;
-}
-
 void RemoveMergedMiningHeader(vector<unsigned char>& vchAux)
 {
     if (vchAux.begin() != std::search(vchAux.begin(), vchAux.end(), UBEGIN(pchMergedMiningHeader), UEND(pchMergedMiningHeader)))

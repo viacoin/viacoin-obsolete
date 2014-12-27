@@ -6,9 +6,6 @@
 
 #include "wallet.h"
 
-const int AUXPOW_START_TESTNET = 452608;
-const int AUXPOW_START_MAINNET = 498725;
-
 class CAuxPow : public CMerkleTx
 {
 public:
@@ -64,6 +61,5 @@ template<typename Stream> void SerReadWrite(Stream& s, boost::shared_ptr<CAuxPow
 }
 
 extern void RemoveMergedMiningHeader(std::vector<unsigned char>& vchAux);
-extern int GetAuxPowStartBlock();
 extern CKeyID GetAuxpowMiningKey();
 #endif

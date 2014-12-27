@@ -114,6 +114,8 @@ public:
         nTargetTimespan = 14 * 24 * 60 * 60; // two weeks
         nTargetSpacing = 1 * 24;
         nCLTVStartBlock = 598725;
+        nAuxPowStartBlock = 498725;
+        nAGWStartBlock = 451000;
 
         /**
          * Build the genesis block. Note that the output of the genesis coinbase cannot
@@ -195,6 +197,8 @@ public:
         nTargetTimespan = 14 * 24 * 60 * 60; //! two weeks
         nTargetSpacing = 1 * 24;
         nCLTVStartBlock = 502664;
+        nAuxPowStartBlock = 452608;
+        nAGWStartBlock = 300000;
         bnProofOfWorkLimit = ~uint256(0) >> 19;
         genesis.nBits = 0x1e1fffff;
 
@@ -252,6 +256,8 @@ public:
         nTargetTimespan = 14 * 24 * 60 * 60; //! two weeks
         nTargetSpacing = 1 * 24;
         nCLTVStartBlock = 1;
+        nAuxPowStartBlock = 1;
+        nAGWStartBlock = 1;
         bnProofOfWorkLimit = ~uint256(0) >> 1;
         genesis.nTime = 1405166035;
         genesis.nBits = 0x207fffff;
