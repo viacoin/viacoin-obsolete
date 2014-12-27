@@ -159,6 +159,10 @@ unsigned int static AntiGravityWave(const CBlockIndex* pindexLast, const CBlockH
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
 {
+    // -regtest mode: always use testnet rules
+    if (Params().AllowMinDifficultyBlocks() && Params().MineBlocksOnDemand()) {
+        return GetNextWorkRequired_V1(pindexLast, pblock);
+    }
     if (pindexLast->nHeight+1 >= GetAGWStartBlock()) {
         return AntiGravityWave(pindexLast, pblock, 2);
     } else if (pindexLast->nHeight+1 >= 3600) {
