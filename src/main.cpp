@@ -2637,7 +2637,7 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
     int nHeight = pindexPrev->nHeight+1;
 
     // Check if auxpow is allowed at this height if block has it
-    if (block.auxpow.get() != NULL && nHeight < GetAuxPowStartBlock())
+    if (block.auxpow.get() != NULL && nHeight < Params().AuxPowStartBlock())
         return state.DoS(100, error("%s : premature auxpow block", __func__),
                          REJECT_INVALID, "time-too-new");
 
@@ -2663,7 +2663,8 @@ bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationState& sta
         return state.DoS(100, error("%s : forked chain older than last checkpoint (height %d)", __func__, nHeight));
 
     int64_t timeframe;
-    if (nHeight < GetAGWStartBlock()) {
+    // Viacoin: AWG hard fork switchover
+    if (nHeight < Params().AGWStartBlock()) {
         timeframe = 15 * 60;
     } else {
         // AntiGravityWave uses tighter timeframe

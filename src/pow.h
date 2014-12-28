@@ -8,9 +8,6 @@
 
 #include <stdint.h>
 
-const int AGW_START_TESTNET = 300000;
-const int AGW_START_MAINNET = 451000;
-
 class CBlockHeader;
 class CBlockIndex;
 class uint256;
@@ -21,6 +18,5 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 bool CheckProofOfWork(uint256 hash, unsigned int nBits);
 bool CheckBlockProofOfWork(const CBlockHeader *pblock);
 uint256 GetBlockProof(const CBlockIndex& block);
-int GetAGWStartBlock();
 
 #endif // BITCOIN_POW_H
