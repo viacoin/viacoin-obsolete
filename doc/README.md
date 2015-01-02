@@ -1,14 +1,18 @@
-Bitcoin Core 0.10.99
+Viacoin Core 0.10.99
 =====================
 
 Setup
 ---------------------
-[Viacoin Core](http://viacoin.org/en/download) is the original Viacoin client and it builds the backbone of the network. However, it downloads and stores the entire history of Viacoin transactions (which is currently several GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once. If you would like the process to go faster you can [download the blockchain directly](bootstrap.md).
+[Viacoin Core](http://viacoin.org/) is the original Viacoin client and it builds the backbone of the network. However, it downloads and stores the entire history of Viacoin transactions (which is currently several GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more. Thankfully you only have to do this once. If you would like the process to go faster you can [download the blockchain directly](bootstrap.md).
 
+Build Quickstart
+----------------
+
+See the quickstart guide to compile on Debian/Ubuntu [here](doc/build-quickstart.md).
 
 Running
 ---------------------
-The following are some helpful notes on how to run Bitcoin on your native platform. 
+The following are some helpful notes on how to run Viacoin on your native platform. 
 
 ### Unix
 
