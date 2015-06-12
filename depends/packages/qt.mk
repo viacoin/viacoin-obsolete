@@ -31,12 +31,17 @@ $(package)_config_opts += -no-iconv
 $(package)_config_opts += -no-gif
 $(package)_config_opts += -no-freetype
 $(package)_config_opts += -no-nis
-$(package)_config_opts += -pch
+$(package)_config_opts += -no-pch
+$(package)_config_opts += -no-feature-style-plastique
 $(package)_config_opts += -no-qml-debug
 $(package)_config_opts += -nomake examples
 $(package)_config_opts += -nomake tests
+$(package)_config_opts += -no-feature-style-cde
+$(package)_config_opts += -no-feature-style-s60
+$(package)_config_opts += -no-feature-style-motif
 $(package)_config_opts += -no-feature-style-windowsmobile
 $(package)_config_opts += -no-feature-style-windowsce
+$(package)_config_opts += -no-feature-style-cleanlooks
 $(package)_config_opts += -no-sql-db2
 $(package)_config_opts += -no-sql-ibase
 $(package)_config_opts += -no-sql-oci
@@ -46,8 +51,26 @@ $(package)_config_opts += -no-sql-odbc
 $(package)_config_opts += -no-sql-psql
 $(package)_config_opts += -no-sql-sqlite
 $(package)_config_opts += -no-sql-sqlite2
+$(package)_config_opts += -skip qtsvg
+$(package)_config_opts += -skip qtwebkit
+$(package)_config_opts += -skip qtwebkit-examples
+$(package)_config_opts += -skip qtserialport
+$(package)_config_opts += -skip qtdeclarative
+$(package)_config_opts += -skip qtmultimedia
+$(package)_config_opts += -skip qtimageformats
+$(package)_config_opts += -skip qtx11extras
+$(package)_config_opts += -skip qtlocation
+$(package)_config_opts += -skip qtsensors
+$(package)_config_opts += -skip qtquick1
+$(package)_config_opts += -skip qtquickcontrols
+$(package)_config_opts += -skip qtactiveqt
+$(package)_config_opts += -skip qtconnectivity
+$(package)_config_opts += -skip qtmacextras
+$(package)_config_opts += -skip qtwinextras
+$(package)_config_opts += -skip qtxmlpatterns
+$(package)_config_opts += -skip qtscript
+$(package)_config_opts += -skip qtdoc
 $(package)_config_opts += -prefix $(host_prefix)
-$(package)_config_opts += -hostprefix $(build_prefix)
 $(package)_config_opts += -bindir $(build_prefix)/bin
 $(package)_config_opts += -no-c++11
 $(package)_config_opts += -openssl-linked
@@ -59,28 +82,10 @@ $(package)_config_opts += -qt-libpng
 $(package)_config_opts += -qt-libjpeg
 $(package)_config_opts += -qt-zlib
 $(package)_config_opts += -qt-pcre
-$(package)_config_opts += -no-pulseaudio
-$(package)_config_opts += -no-openvg
-$(package)_config_opts += -no-xrender
-$(package)_config_opts += -no-alsa
-$(package)_config_opts += -no-mtdev
-$(package)_config_opts += -no-gstreamer
-$(package)_config_opts += -no-mitshm
-$(package)_config_opts += -no-kms
-$(package)_config_opts += -no-reduce-relocations
-$(package)_config_opts += -no-egl
-$(package)_config_opts += -no-eglfs
-$(package)_config_opts += -no-linuxfb
-$(package)_config_opts += -no-xinput2
-$(package)_config_opts += -no-libudev
-$(package)_config_opts += -no-use-gold-linker
-$(package)_config_opts += -reduce-exports
-$(package)_config_opts += -optimized-qmake
 
 ifneq ($(build_os),darwin)
 $(package)_config_opts_darwin = -xplatform macx-clang-linux
 $(package)_config_opts_darwin += -device-option MAC_SDK_PATH=$(OSX_SDK)
-$(package)_config_opts_darwin += -device-option MAC_SDK_VERSION=$(OSX_SDK_VERSION)
 $(package)_config_opts_darwin += -device-option CROSS_COMPILE="$(host)-"
 $(package)_config_opts_darwin += -device-option MAC_MIN_VERSION=$(OSX_MIN_VERSION)
 $(package)_config_opts_darwin += -device-option MAC_TARGET=$(host)
@@ -89,9 +94,14 @@ endif
 
 $(package)_config_opts_linux  = -qt-xkbcommon
 $(package)_config_opts_linux += -qt-xcb
+$(package)_config_opts_linux += -no-eglfs
+$(package)_config_opts_linux += -no-linuxfb
 $(package)_config_opts_linux += -system-freetype
 $(package)_config_opts_linux += -no-sm
 $(package)_config_opts_linux += -fontconfig
+$(package)_config_opts_linux += -no-xinput2
+$(package)_config_opts_linux += -no-libudev
+$(package)_config_opts_linux += -no-egl
 $(package)_config_opts_linux += -no-opengl
 $(package)_config_opts_arm_linux  = -platform linux-g++ -xplatform $(host)
 $(package)_config_opts_i686_linux  = -xplatform linux-g++-32
