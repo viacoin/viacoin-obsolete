@@ -8,7 +8,7 @@ $(package)_dependencies=openssl
 $(package)_linux_dependencies=freetype fontconfig dbus libxcb libX11 xproto libXext
 $(package)_build_subdir=qtbase
 $(package)_qt_libs=corelib network widgets gui plugins testlib
-$(package)_patches=mac-qmake.conf fix-xcb-include-order.patch mingw-uuidof.patch pidlist_absolute.patch
+$(package)_patches=mac-qmake.conf fix-xcb-include-order.patch mingw-uuidof.patch
 
 $(package)_qttranslations_file_name=qttranslations-$($(package)_suffix)
 $(package)_qttranslations_sha256_hash=c4bd6db6e426965c6f8824c54e81f68bbd61e2bae1bcadc328c6e81c45902a0d
@@ -32,16 +32,11 @@ $(package)_config_opts += -no-gif
 $(package)_config_opts += -no-freetype
 $(package)_config_opts += -no-nis
 $(package)_config_opts += -no-pch
-$(package)_config_opts += -no-feature-style-plastique
 $(package)_config_opts += -no-qml-debug
 $(package)_config_opts += -nomake examples
 $(package)_config_opts += -nomake tests
-$(package)_config_opts += -no-feature-style-cde
-$(package)_config_opts += -no-feature-style-s60
-$(package)_config_opts += -no-feature-style-motif
 $(package)_config_opts += -no-feature-style-windowsmobile
 $(package)_config_opts += -no-feature-style-windowsce
-$(package)_config_opts += -no-feature-style-cleanlooks
 $(package)_config_opts += -no-sql-db2
 $(package)_config_opts += -no-sql-ibase
 $(package)_config_opts += -no-sql-oci
@@ -51,26 +46,8 @@ $(package)_config_opts += -no-sql-odbc
 $(package)_config_opts += -no-sql-psql
 $(package)_config_opts += -no-sql-sqlite
 $(package)_config_opts += -no-sql-sqlite2
-$(package)_config_opts += -skip qtsvg
-$(package)_config_opts += -skip qtwebkit
-$(package)_config_opts += -skip qtwebkit-examples
-$(package)_config_opts += -skip qtserialport
-$(package)_config_opts += -skip qtdeclarative
-$(package)_config_opts += -skip qtmultimedia
-$(package)_config_opts += -skip qtimageformats
-$(package)_config_opts += -skip qtx11extras
-$(package)_config_opts += -skip qtlocation
-$(package)_config_opts += -skip qtsensors
-$(package)_config_opts += -skip qtquick1
-$(package)_config_opts += -skip qtquickcontrols
-$(package)_config_opts += -skip qtactiveqt
-$(package)_config_opts += -skip qtconnectivity
-$(package)_config_opts += -skip qtmacextras
-$(package)_config_opts += -skip qtwinextras
-$(package)_config_opts += -skip qtxmlpatterns
-$(package)_config_opts += -skip qtscript
-$(package)_config_opts += -skip qtdoc
 $(package)_config_opts += -prefix $(host_prefix)
+$(package)_config_opts += -hostprefix $(build_prefix)
 $(package)_config_opts += -bindir $(build_prefix)/bin
 $(package)_config_opts += -no-c++11
 $(package)_config_opts += -openssl-linked
@@ -82,10 +59,28 @@ $(package)_config_opts += -qt-libpng
 $(package)_config_opts += -qt-libjpeg
 $(package)_config_opts += -qt-zlib
 $(package)_config_opts += -qt-pcre
+$(package)_config_opts += -no-pulseaudio
+$(package)_config_opts += -no-openvg
+$(package)_config_opts += -no-xrender
+$(package)_config_opts += -no-alsa
+$(package)_config_opts += -no-mtdev
+$(package)_config_opts += -no-gstreamer
+$(package)_config_opts += -no-mitshm
+$(package)_config_opts += -no-kms
+$(package)_config_opts += -no-reduce-relocations
+$(package)_config_opts += -no-egl
+$(package)_config_opts += -no-eglfs
+$(package)_config_opts += -no-linuxfb
+$(package)_config_opts += -no-xinput2
+$(package)_config_opts += -no-libudev
+$(package)_config_opts += -no-use-gold-linker
+$(package)_config_opts += -reduce-exports
+$(package)_config_opts += -optimized-qmake
 
 ifneq ($(build_os),darwin)
 $(package)_config_opts_darwin = -xplatform macx-clang-linux
 $(package)_config_opts_darwin += -device-option MAC_SDK_PATH=$(OSX_SDK)
+$(package)_config_opts_darwin += -device-option MAC_SDK_VERSION=$(OSX_SDK_VERSION)
 $(package)_config_opts_darwin += -device-option CROSS_COMPILE="$(host)-"
 $(package)_config_opts_darwin += -device-option MAC_MIN_VERSION=$(OSX_MIN_VERSION)
 $(package)_config_opts_darwin += -device-option MAC_TARGET=$(host)
@@ -94,14 +89,9 @@ endif
 
 $(package)_config_opts_linux  = -qt-xkbcommon
 $(package)_config_opts_linux += -qt-xcb
-$(package)_config_opts_linux += -no-eglfs
-$(package)_config_opts_linux += -no-linuxfb
 $(package)_config_opts_linux += -system-freetype
 $(package)_config_opts_linux += -no-sm
 $(package)_config_opts_linux += -fontconfig
-$(package)_config_opts_linux += -no-xinput2
-$(package)_config_opts_linux += -no-libudev
-$(package)_config_opts_linux += -no-egl
 $(package)_config_opts_linux += -no-opengl
 $(package)_config_opts_arm_linux  = -platform linux-g++ -xplatform $(host)
 $(package)_config_opts_i686_linux  = -xplatform linux-g++-32
@@ -118,8 +108,8 @@ endef
 define $(package)_extract_cmds
   mkdir -p $($(package)_extract_dir) && \
   echo "$($(package)_sha256_hash)  $($(package)_source)" > $($(package)_extract_dir)/.$($(package)_file_name).hash && \
-  echo "$($(package)_qttranslations_sha256_hash)  $($(package)_source_dir)/$($(package)_qttranslations_file_name)" >> $($(package)_extract_dir)/.$($(package)_file_name).hash && \
-  echo "$($(package)_qttools_sha256_hash)  $($(package)_source_dir)/$($(package)_qttools_file_name)" >> $($(package)_extract_dir)/.$($(package)_file_name).hash && \
+  echo "$($(package)_qttranslations_sha256_hash)  $($(package)_source_dir)/$($(package)_qttranslations_file_name)" > $($(package)_extract_dir)/.$($(package)_file_name).hash && \
+  echo "$($(package)_qttools_sha256_hash)  $($(package)_source_dir)/$($(package)_qttools_file_name)" > $($(package)_extract_dir)/.$($(package)_file_name).hash && \
   $(build_SHA256SUM) -c $($(package)_extract_dir)/.$($(package)_file_name).hash && \
   mkdir qtbase && \
   tar --strip-components=1 -xf $($(package)_source) -C qtbase && \
@@ -141,7 +131,6 @@ define $(package)_preprocess_cmds
   cp -f $($(package)_patch_dir)/mac-qmake.conf qtbase/mkspecs/macx-clang-linux/qmake.conf && \
   patch -p1 < $($(package)_patch_dir)/fix-xcb-include-order.patch && \
   patch -p1 < $($(package)_patch_dir)/mingw-uuidof.patch && \
-  patch -p1 < $($(package)_patch_dir)/pidlist_absolute.patch && \
   echo "QMAKE_CFLAGS     += $($(package)_cflags) $($(package)_cppflags)" >> qtbase/mkspecs/common/gcc-base.conf && \
   echo "QMAKE_CXXFLAGS   += $($(package)_cxxflags) $($(package)_cppflags)" >> qtbase/mkspecs/common/gcc-base.conf && \
   echo "QMAKE_LFLAGS     += $($(package)_ldflags)" >> qtbase/mkspecs/common/gcc-base.conf && \
