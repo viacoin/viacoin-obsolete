@@ -5,6 +5,18 @@ Viacoin Core integration/staging tree
 
 http://viacoin.org
 
+Development announcement
+-----------------------
+Viacoin Core 0.13.2 is currently under development.
+The Viacoin Core 0.13.2 will adopt SegWit & other features
+The Viacoin Core 0.13.2 repository can be found here
+(https://github.com/romanornr/viacoin/tree/viafresh)
+
+This Version is not ready yet. When it's ready it will be 
+available in this current repository in the master branch.
+An official release will be available in (https://github.com/viacoin/viacoin/releases) 
+with the tag version 0.13.2
+
 Quickstart
 ----------
 
