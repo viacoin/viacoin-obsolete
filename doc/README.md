@@ -1,5 +1,17 @@
-Viacoin Core 0.10.8
+Viacoin Core 0.10.10
 =====================
+
+Development announcement
+-----------------------
+Viacoin Core 0.13.2 is currently under development.
+The Viacoin Core 0.13.2 will adopt SegWit & other features
+The Viacoin Core 0.13.2 repository can be found here
+(https://github.com/romanornr/viacoin/tree/viafresh)
+
+This Version is not ready yet. When it's ready it will be 
+available in this current repository in the master branch.
+An official release will be available in (https://github.com/viacoin/viacoin/releases) 
+with the tag version 0.13.2
 
 Setup
 ---------------------
@@ -37,7 +49,7 @@ Drag Viacoin-Qt to your applications folder, and then run Viacoin-Qt.
 
 ### Need Help?
 
-* Ask for help on [#viacoin](http://webchat.freenode.net?channels=viacoin) on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net?channels=viacoin).
+* Ask for help on Telegram (https://telegram.me/viacoin)
 
 Building
 ---------------------

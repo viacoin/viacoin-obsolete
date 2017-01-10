@@ -1,10 +1,9 @@
-Viacoin Core version 0.10.9 is now available from:
+Viacoin Core version 0.10.10 is now available from:
 
   https://github.com/viacoin/viacoin/releases
 
-This is a new minor version release, bringing bug fixes, the BIP65
-(CLTV) consensus change, and relay policy preparation for BIP113. It is
-recommended to upgrade to this version as soon as possible.
+This is a new minor version release, bringing bug fixes, the re-implementation
+of FindAndDelete(). It is recommended to upgrade to this version as soon as possible.
 
 Please report bugs using the issue tracker at github:
 
@@ -21,26 +20,21 @@ shut down (which might take a few minutes for older versions), then run the
 installer (on Windows) or just copy over /Applications/Viacoin-Qt (on Mac) or
 viacoind/viacoin-qt (on Linux).
 
-Notable changes since 0.10.9
+Notable changes since 0.10.10
 ============================
 
 
-Windows bug fix for corrupted UTXO database on unclean shutdowns
+Transaction that takes 5 hours to verify
 ----------------------------------------------------------------
 
-Several Windows users reported that they often need to reindex the
-entire blockchain after an unclean shutdown of Bitcoin Core on Windows
-(or an unclean shutdown of Windows itself). Although unclean shutdowns
-remain unsafe, this release no longer relies on memory-mapped files for
-the UTXO database, which significantly reduced the frequency of unclean
-shutdowns leading to required reindexes during testing.
+Re-implemented FindAndDelete() to build a new script by copying the parts 
+that are not removed, instead of removing in-place. I don’t know if any 
+other re-implementation of the consensus code is more vulnerable to this 
+type of resource consumption
 
-For more information, see: <https://github.com/bitcoin/bitcoin/pull/6917>
+For more information, see: <https://github.com/bitcoin/bitcoin/pull/7907>
 
-Other fixes for database corruption on Windows are expected in the
-next major release.
-
-0.10.9 Change log
+0.10.10 Change log
 =================
 
 Detailed release notes follow. This overview includes changes that affect
@@ -48,6 +42,10 @@ behavior, not code moves, refactors and string updates. For convenience in locat
 the code changes and accompanying discussion, both the pull request and
 git merge commit are mentioned.
 
+- `390449b` Optimize and Cleanup CScript::FindAndDelete
+- `126df74` Improve worst-case behavior of CScript::FindAndDelete
+- `a369575` Replace memcmp with std::equal in CScript::FindAndDelete
+- `d08654c` Fix replaypriority calculation error
 - #6953 `8b3311f` alias -h for --help
 - #6953 `97546fc` Change URLs to https in debian/control
 - #6953 `38671bf` Update debian/changelog and slight tweak to debian/control
@@ -88,6 +86,7 @@ Thanks to everyone who directly contributed to this release:
 - Pieter Wuille
 - Wladimir J. van der Laan
 - Zak Wilcox
+- Patrick Strateman
 
 And all those who contributed additional code review and/or security research:
 
