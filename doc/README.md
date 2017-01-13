@@ -1,4 +1,4 @@
-Viacoin Core 0.10.10
+Viacoin Core 0.10.11
 =====================
 
 Development announcement

@@ -1,4 +1,4 @@
-Viacoin Core version 0.10.10 is now available from:
+Viacoin Core version 0.10.11 is now available from:
 
   https://github.com/viacoin/viacoin/releases
 
@@ -20,7 +20,7 @@ shut down (which might take a few minutes for older versions), then run the
 installer (on Windows) or just copy over /Applications/Viacoin-Qt (on Mac) or
 viacoind/viacoin-qt (on Linux).
 
-Notable changes since 0.10.10
+Notable changes since 0.10.11
 ============================
 
 
@@ -34,7 +34,7 @@ type of resource consumption
 
 For more information, see: <https://github.com/bitcoin/bitcoin/pull/7907>
 
-0.10.10 Change log
+0.10.11 Change log
 =================
 
 Detailed release notes follow. This overview includes changes that affect
@@ -46,6 +46,12 @@ git merge commit are mentioned.
 - `126df74` Improve worst-case behavior of CScript::FindAndDelete
 - `a369575` Replace memcmp with std::equal in CScript::FindAndDelete
 - `d08654c` Fix replaypriority calculation error
+- #6471 `3438795` Depends: bump to qt 5.5S
+- `4693120` fix a static qt5 crash when using certain versions of libxcb
+- `4cc1912` depends native ccache 3.2.4
+- `51865ec` depends Boost 1.59.0
+- `3f40d1c` osx: bump build sdk to 10.9
+- `b1130f8` enable pre-compiled headers for qt
 - #6953 `8b3311f` alias -h for --help
 - #6953 `97546fc` Change URLs to https in debian/control
 - #6953 `38671bf` Update debian/changelog and slight tweak to debian/control
