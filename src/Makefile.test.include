@@ -3,7 +3,6 @@ bin_PROGRAMS += test/test_bitcoin
 TEST_SRCDIR = test
 TEST_BINARY=test/test_bitcoin$(EXEEXT)
 
-
 EXTRA_DIST += \
 	test/bctest.py \
 	test/bitcoin-util-test.py \
@@ -93,6 +92,19 @@ test_test_bitcoin_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) -s
 
 nodist_test_test_bitcoin_SOURCES = $(GENERATED_TEST_FILES)
 
+bin_PROGRAMS += test/alert_tests_data
+test_alert_tests_data_BINARY   = test/alert_tests_data
+test_alert_tests_data_SOURCES  = test/alert_tests_data.cpp
+test_alert_tests_data_CPPFLAGS = $(BITCOIN_INCLUDES) -I$(builddir)/test/ $(TESTDEFS)
+test_alert_tests_data_LDADD    = $(LIBBITCOIN_SERVER) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET) \
+                                 $(LIBBITCOIN_CRYPTO) $(LIBBITCOIN_UNIVALUE) $(LIBLEVELDB) $(LIBMEMENV) \
+                                 $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(BOOST_LIBS) $(BOOST_UNIT_TEST_FRAMEWORK_LIB)
+test_alert_tests_data_LDFLAGS  = $(RELDFLAGS) $(AM_LDFLAGS)
+
+ALERT_TESTS_DATA_BINARY        = test/alert_tests_data$(EXEEXT)
+
+$(RAW_TEST_FILES): $(ALERT_TESTS_DATA_BINARY)
+
 $(BITCOIN_TESTS): $(GENERATED_TEST_FILES)
 
 CLEAN_BITCOIN_TEST = test/*.gcda test/*.gcno $(GENERATED_TEST_FILES)
@@ -105,7 +117,7 @@ bitcoin_test_check: $(TEST_BINARY) FORCE
 	$(MAKE) check-TESTS TESTS=$^
 
 bitcoin_test_clean : FORCE
-	rm -f $(CLEAN_BITCOIN_TEST) $(test_test_bitcoin_OBJECTS) $(TEST_BINARY)
+	rm -f $(CLEAN_BITCOIN_TEST) $(test_test_bitcoin_OBJECTS) $(TEST_BINARY) ($ALERT_TESTS_DATA_BINARY)
 
 check-local:
 	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C secp256k1 check
